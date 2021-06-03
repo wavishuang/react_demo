@@ -1,0 +1,12 @@
+.bottomNav {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #ddd;
+  z-index: 999;
+
+  .secondary {
+    color: yellow;
+  }
+}
