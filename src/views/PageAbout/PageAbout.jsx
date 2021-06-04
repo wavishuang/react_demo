@@ -14,8 +14,10 @@ const PageAbout = () => {
   return (
     <div className={styles.about}>
       <CssBaseLine />
-      <Menu page={3} />
+      
       <h2 className={publicStyles.title}>About</h2>
+
+      <Menu page={3} />
     </div>
   )
 }

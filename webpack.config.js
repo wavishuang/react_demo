@@ -1,9 +1,10 @@
 /* webpack.config.js */
+const webpack = require('webpack');
 const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+const config = {
   entry: './src/index.jsx',  // 進入點
   output: { // 打包設定
     filename: 'bundle.js',
@@ -42,11 +43,20 @@ module.exports = {
     ]
   },
   devServer: {
+    inline: true,
+    port: 5000,
     contentBase: './dist'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new MiniCssExtractPlugin({
       filename: 'index.css'
     })
   ]
 };
+
+module.exports = config;

@@ -14,8 +14,10 @@ const PageFavorite = () => {
   return (
     <div className={styles.favorite}>
       <CssBaseLine />
-      <Menu page={2} />
+
       <h2 className={publicStyles.title}>Favorite</h2>
+
+      <Menu page={2} />
     </div>
   )
 };

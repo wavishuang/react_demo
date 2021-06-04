@@ -62,7 +62,7 @@ const Menu = (props) => {
       <BottomNavigationAction label="收藏" icon={<FavoriteIcon />} onClick={() => handleLink('favorite')} />
       <BottomNavigationAction label="關於我" icon={<CollectionsBookmarkIcon />} onClick={() => handleLink('about')} />
       <BottomNavigationAction label="登入" icon={<ExitToAppIcon />} onClick={() => handleLink('login')} />
-      {/*<BottomNavigationAction label="登入" icon={<AddShoppingCartIcon />} onClick={() => handleLink('cart')} />*/}
+      {/*<BottomNavigationAction label="購物車" icon={<AddShoppingCartIcon />} onClick={() => handleLink('cart')} />*/}
     </BottomNavigation>
   )
 }
