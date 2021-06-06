@@ -90,6 +90,7 @@ export default function PageLogin() {
             control={<Checkbox value="remember" color="primary" checked={keep} onChange={handleKeep} />}
             label="記住我"
           />
+          <Button variant="contained" color="primary">Line 登入</Button>
           <Button
             type="button"
             fullWidth
@@ -103,7 +104,7 @@ export default function PageLogin() {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                忘記密碼
+                忘記密碼a
               </Link>
             </Grid>
             <Grid item>
@@ -115,6 +116,7 @@ export default function PageLogin() {
         </form>
       </div>
       <Box mt={8}>
+        
         <Copyright />
       </Box>
     </Container>
