@@ -8,5 +8,6 @@ export const setUser = user => ({
 export const fetchUser = () => async (dispatch) => {
   const response = await fetch('http://httpbin.org/get');
   const user = await response.json();
+  console.log("user:", user);
   dispatch(setUser(user));
 }

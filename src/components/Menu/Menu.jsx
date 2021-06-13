@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // Material
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +14,15 @@ import HomeIcon from '@material-ui/icons/Home'; // 首頁
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark'; // 關於我
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'; // 登入
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-
+import PersonIcon from '@material-ui/icons/Person';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping'; // 運送資訊
+import NotificationsIcon from '@material-ui/icons/Notifications'; // 通知
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'; // 通知
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'; // 購物車
+import StorefrontIcon from '@material-ui/icons/Storefront';  // 商店
+import FaceIcon from '@material-ui/icons/Face'; // 使用者資訊
+import ListIcon from '@material-ui/icons/List'; // 訂單資訊
+import InfoIcon from '@material-ui/icons/Info'; // 商品資訊
 //import RestoreIcon from '@material-ui/icons/Restore';
 //import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -32,19 +41,25 @@ const useStyles = makeStyles({
 });
 
 const Menu = (props) => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if(auth.sub && auth.name) {
+      setIsLogined(true);
+    }
+  }, [auth]);
+
+  const [isLogined, setIsLogined] = useState(false);
   const [value] = useState(() => {
     return (props.page !== null) ? props.page : null;
   });
 
-  
   //const [favoriteClass, setFavoriteClass] = useState('inherit');
   //useEffect(() => {
   //  if(props.page === 1) {
   //    setFavoriteClass('secondary');
   //  }
   //}, []);
-
-  const classes = useStyles();
 
   const history = useHistory();
   const handleLink = (path) => {
@@ -61,8 +76,10 @@ const Menu = (props) => {
       <BottomNavigationAction label="最新消息" icon={<NewReleasesIcon />} onClick={() => handleLink('news')} />
       <BottomNavigationAction label="收藏" icon={<FavoriteIcon />} onClick={() => handleLink('favorite')} />
       <BottomNavigationAction label="關於我" icon={<CollectionsBookmarkIcon />} onClick={() => handleLink('about')} />
-      <BottomNavigationAction label="登入" icon={<ExitToAppIcon />} onClick={() => handleLink('login')} />
-      {/*<BottomNavigationAction label="購物車" icon={<AddShoppingCartIcon />} onClick={() => handleLink('cart')} />*/}
+      {isLogined 
+        ? <BottomNavigationAction label="會員資訊" icon={<PersonIcon />} onClick={() => handleLink('cart')} /> 
+        :<BottomNavigationAction label="登入" icon={<ExitToAppIcon />} onClick={() => handleLink('login')} />
+      }
     </BottomNavigation>
   )
 }

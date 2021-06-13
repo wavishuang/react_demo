@@ -1,25 +1,16 @@
 import React, {Fragment, useState} from "react";
 import {Switch, Route} from "react-router-dom";
 
-// material
-import CssBaseLine from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
 
 // components
-import Menu from "../../components/Menu";
 import NewsList from "./NewsList.jsx";
 import NewsReader from "./NewsReader.jsx";
 import NewsForm from "./NewsForm.jsx";
 
-// SCSS
-import publicStyles from "../../scss/styles.scss";
-import styles from "./PageNews.scss";
-
 const PageNews = () => {
   return (
-    <div className={styles.news}>
-      <CssBaseLine />
-      <Menu page={1} />
-      <h2 className={publicStyles.title}>最新消息</h2>
+    <Container>
       <NewsForm />
       <Switch>
         <Route
@@ -36,7 +27,7 @@ const PageNews = () => {
           component={() => <NewsReader />} 
         />
       </Switch>
-    </div>
+    </Container>
   );
 };
 

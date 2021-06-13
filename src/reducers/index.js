@@ -1,9 +1,11 @@
 import news from "./news.js";
 import user from "./user.js";
+import auth from "./auth.js";
 
 const rootReducers = {
   news,
-  user
+  user,
+  auth
 };
 
 export default rootReducers;

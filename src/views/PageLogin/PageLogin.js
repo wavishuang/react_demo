@@ -15,9 +15,14 @@ import Container from '@material-ui/core/Container';
 
 // components
 import Copyright from "../../components/Copyright.js";
+import LineSquareDefault from "../../images/LineSquareDefault.png";
 
-import qs from "qs";
-import jwt_decode from "jwt-decode";
+import {
+  getLineCode,
+  getApiToken,
+  getLineUserInfo 
+} from "../../utils/helperLine.js";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,6 +38,16 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  lineBtn: {
+    background: '#00b902',
+    color: '#fff',
+    paddingLeft: '6px',
+    marginTop: '3rem'
+  },
+  lineImg: {
+    width: '30px',
+    height: '30px'
+  }
 }));
 
 export default function PageLogin() {
@@ -42,13 +57,50 @@ export default function PageLogin() {
   const [password, setPassword] = useState('');
   const [keep, setKeep] = useState(false);
 
+  const clientState = 'abcdef';
+
+  let urlParams = new URLSearchParams(window.location.search);
+  let responseCode = '';
+  let responseState = '';
+
+  if(urlParams.has('code') && urlParams.has('state') && urlParams.get('state') === clientState) {
+    responseCode = urlParams.get('code');
+    responseState = urlParams.get('state');
+    
+    getApiToken(responseCode, (res) => {
+      console.log(res);
+      const {id_token} = JSON.parse(localStorage.lineInfo);
+      
+      getLineUserInfo(id_token, (res2) => {
+        console.log(res2);
+      })
+    });
+  }
+
+  if(localStorage.lineInfo) { // 已登入
+    const lineInfo = JSON.parse(localStorage.lineInfo);
+    alert('hello', lineInfo.id_token)
+    if(lineInfo.id_token) {
+      getLineUserInfo(lineInfo.id_token, (res) => {
+        console.log(res);
+      });  // 取得 使用者資訊
+    }
+  }
+
+  // ======= Line Login : 導向 Line 頁面，判斷是否登入 =======
+  const handleLineLogin = () => {
+    getLineCode(clientState);
+  }
+
+  // ======= Event =======
+  // 記住我
   const handleKeep = () => {
     if(keep) setKeep(false);
     else setKeep(true);
   }
 
+  // 登入
   const handleSubmit = () => {
-    alert("hello")
     console.log('submit');
   }
 
@@ -90,7 +142,6 @@ export default function PageLogin() {
             control={<Checkbox value="remember" color="primary" checked={keep} onChange={handleKeep} />}
             label="記住我"
           />
-          <Button variant="contained" color="primary">Line 登入</Button>
           <Button
             type="button"
             fullWidth
@@ -104,7 +155,7 @@ export default function PageLogin() {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                忘記密碼a
+                忘記密碼
               </Link>
             </Grid>
             <Grid item>
@@ -113,10 +164,18 @@ export default function PageLogin() {
               </Link>
             </Grid>
           </Grid>
+
+          <Button
+            type="button"
+            fullWidth
+            variant="contained" 
+            className={classes.lineBtn}
+            onClick={() => handleLineLogin()}>
+            <img src={LineSquareDefault} className={classes.lineImg}/>使用 Line 登入
+          </Button>
         </form>
       </div>
       <Box mt={8}>
-        
         <Copyright />
       </Box>
     </Container>

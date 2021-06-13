@@ -7,8 +7,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = {
   entry: './src/index.jsx',  // 進入點
   output: { // 打包設定
-    filename: 'bundle[hash].js',
-    path: path.resolve(__dirname, './dist/')
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, './dist/'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -39,13 +40,21 @@ const config = {
             loader: 'sass-loader'
           }
         ]
+      },
+      {
+        test: /\.(png|jp?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       }
     ]
   },
   devServer: {
-    inline: true,
     port: 5000,
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: true
   },
   plugins: [
     new webpack.DefinePlugin({
