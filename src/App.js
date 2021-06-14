@@ -13,7 +13,7 @@ import NotFound from "./views/NotFound";
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
         <Route path="/home" component={PageHome} />
         <Route path="/news" component={PageNews} />
@@ -23,7 +23,7 @@ const App = () => {
         <Route exact path="/" component={PageHome} />
         <Route path="*" component={NotFound} />
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

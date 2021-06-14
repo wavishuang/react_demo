@@ -1,24 +1,13 @@
 import React from "react";
 
 // material
-import CssBaseLine from "@material-ui/core/CssBaseline";
-
-// components
-import Menu from "../../components/Menu";
-
-// SCSS
-import publicStyles from "../../scss/styles.scss";
-import styles from "./PageAbout.scss";
+import Container from "@material-ui/core/Container";
 
 const PageAbout = () => {
   return (
-    <div className={styles.about}>
-      <CssBaseLine />
-      
-      <h2 className={publicStyles.title}>About</h2>
-
-      <Menu page={3} />
-    </div>
+    <Container>
+      關於我
+    </Container>
   )
 }
 

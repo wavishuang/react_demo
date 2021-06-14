@@ -2,20 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../../actions/actionUser.js";
 
-
 // components
 import HelloWorld from "../../components/HelloWorld";
 import SayHello from "../../components/SayHello";
 import Counter from "../../components/Counter";
 import SuperAmazingCounter from "../../components/SuperAmazingCounter";
-import Menu from "../../components/Menu";
+//import Menu from "../../components/Menu";
 
 // SCSS
-import publicStyles from "../../scss/styles.scss";
-import styles from "./PageHome.scss";
+//import publicStyles from "../../scss/styles.scss";
+//import styles from "./PageHome.scss";
 
 // Material
-import CssBaseLine from "@material-ui/core/CssBaseline";
+//import CssBaseLine from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Switch from '@material-ui/core/Switch';
@@ -64,37 +63,32 @@ const PageHome = () => {
   }
 
   return (
-    <div className={styles.home}>
-      <h2 className={publicStyles.title}>首頁</h2>
-      <CssBaseLine />
-      <Container>
-        <HelloWorld />
-        <SuperAmazingCounter />
-        <Typography component="div">
-          <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>關閉計數器</Grid>
-            <Grid item>
-              <Switch
-                defaultChecked
-                onChange={handleChange}
-                name="displayCounter"
-                color="secondary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-            </Grid>
-            <Grid item>打開計數器</Grid>
+    <Container>
+      <HelloWorld />
+      <SuperAmazingCounter />
+      <Typography component="div">
+        <Grid component="label" container alignItems="center" spacing={1}>
+          <Grid item>關閉計數器</Grid>
+          <Grid item>
+            <Switch
+              defaultChecked
+              onChange={handleChange}
+              name="displayCounter"
+              color="secondary"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
+            />
           </Grid>
-        </Typography>
+          <Grid item>打開計數器</Grid>
+        </Grid>
+      </Typography>
 
-        { displayCounter ? <Counter /> : "" }
-        {
-          names.map(name => 
-            <SayHello name={name} key={name} />
-          )
-        }
-      </Container>
-      <Menu page={0} />
-    </div> 
+      { displayCounter ? <Counter /> : "" }
+      {
+        names.map(name => 
+          <SayHello name={name} key={name} />
+        )
+      }
+    </Container>  
   );
 };
 
