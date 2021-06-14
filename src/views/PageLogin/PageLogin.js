@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+<<<<<<< HEAD
 // components
 import Copyright from "../../components/Copyright.js";
 import LineSquareDefault from "../../images/LineSquareDefault.png";
@@ -141,6 +142,9 @@ export default function PageLogin() {
     console.log('submit');
   }
 
+=======
+const PageLogin = () => {
+>>>>>>> f628f38c49f0d1491af999b92fe5588ed3deca4e
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
