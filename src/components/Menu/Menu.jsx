@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Material
 import { makeStyles } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
@@ -26,6 +27,16 @@ import InfoIcon from '@material-ui/icons/Info'; // 商品資訊
 //import RestoreIcon from '@material-ui/icons/Restore';
 //import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+import LogoutIcon from "../../images/logout.png";
+
+import {
+  getLineCode,
+  getApiToken,
+  getLineUserInfo 
+} from "../../utils/helperLine.js";
+
+import { clearLineUser } from "../../actions/actionAuth";
+
 // SCSS
 import styles from "./index.scss";
 
@@ -38,11 +49,29 @@ const useStyles = makeStyles({
     borderTop: '1px solid #ddd',
     zIndex: 999
   },
+  button: {
+    fontSize: '12px',
+    color: 'rgba(0,0,0,.54)',
+    background: '#fff',
+    border: 0,
+    boxShadow: 'none',
+    outLine: 'none'
+  },
+  buttonInner: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  buttonImg: {
+    width: '24px',
+    height: '24px',
+    color: 'rgba(0,0,0,.54)'
+  }
 });
 
 const Menu = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const classes = useStyles();
   useEffect(() => {
     if(auth.sub && auth.name) {
       setIsLogined(true);
@@ -53,6 +82,8 @@ const Menu = (props) => {
   const [value] = useState(() => {
     return (props.page !== null) ? props.page : null;
   });
+
+
 
   //const [favoriteClass, setFavoriteClass] = useState('inherit');
   //useEffect(() => {
@@ -66,6 +97,13 @@ const Menu = (props) => {
     history.push(`/${path}`);
   }
 
+  const handleLogout = () => {
+    dispatch(clearLineUser);
+    localStorage.removeItem('lineInfo');
+    localStorage.removeItem('lineUserInfo');
+    history.go(0);
+  }
+
   return (
     <BottomNavigation
       value={value}
@@ -77,7 +115,11 @@ const Menu = (props) => {
       <BottomNavigationAction label="收藏" icon={<FavoriteIcon />} onClick={() => handleLink('favorite')} />
       <BottomNavigationAction label="關於我" icon={<CollectionsBookmarkIcon />} onClick={() => handleLink('about')} />
       {isLogined 
-        ? <BottomNavigationAction label="會員資訊" icon={<PersonIcon />} onClick={() => handleLink('cart')} /> 
+        ? <Button 
+            variant="contained"
+            className={classes.button} onClick={() => handleLogout('cart')}>
+            <div className={classes.buttonInner}><img src={LogoutIcon} className={classes.buttonImg} />登出</div>
+          </Button> 
         :<BottomNavigationAction label="登入" icon={<ExitToAppIcon />} onClick={() => handleLink('login')} />
       }
     </BottomNavigation>

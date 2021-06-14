@@ -6,3 +6,9 @@ export const setLineUserInfo = lineUserInfo => {
     data: lineUserInfo
   }
 };
+
+export const clearLineUser = () => {
+  return {
+    type: TYPES.CLEAR_LINE_USER
+  }
+}

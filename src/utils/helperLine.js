@@ -11,7 +11,6 @@ export function getLineCode(clientState) {
 
 // Step 2. 夾帶 Line 回傳的 code，獲取 id_token
 export function getApiToken(code, callback=null) {
-  console.log("======== code ========", code);
   const uri = 'https://api.line.me/oauth2/v2.1/token';
   fetch(uri, {
     method: 'post',
@@ -23,7 +22,10 @@ export function getApiToken(code, callback=null) {
   .then(res => {
     return res.json();   // 使用 json() 可以得到 json 物件
   }).then(result => {
-    localStorage.setItem('lineInfo', JSON.stringify(result));
+    if(result.id_token) {
+      localStorage.setItem('lineInfo', JSON.stringify(result));
+    }
+    
     if(callback) callback(result);
   });
 }
@@ -43,7 +45,6 @@ export function getLineUserInfo(idToken, callback=null) {
     return res.json();   // 使用 json() 可以得到 json 物件
   }).then(result => {
     localStorage.setItem('lineUserInfo', JSON.stringify(result));
-    console.log(result);
     if(callback) callback(result);
   });
 }
