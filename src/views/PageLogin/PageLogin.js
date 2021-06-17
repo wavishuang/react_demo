@@ -14,10 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 6cfa978e50292d42b30f5df88ef8c17163992e57
 // components
 import Copyright from "../../components/Copyright.js";
 import LineSquareDefault from "../../images/LineSquareDefault.png";
@@ -83,8 +79,12 @@ export default function PageLogin() {
           if(res2.error) {
             alert(res2.error_description);
           } else {
-            fetchUserLogin(res2);
-            // history.push('/');
+            fetchUserLogin(res2, (res2) => {
+              if(res2.code === '0000') {
+                console.log(res2);
+                history.push('/');
+              }
+            });
           }
         });
       }
@@ -96,8 +96,12 @@ export default function PageLogin() {
 
     if(!lineInfo.error && lineInfo.id_token) {
       getLineUserInfo(lineInfo.id_token, (res) => {
-        fetchUserLogin(res);
-        // history.push('/');
+        fetchUserLogin(res, (res2) => {
+          if(res2.code === '0000') {
+            console.log(res2);
+            history.push('/');
+          }
+        });
       });  // 取得 使用者資訊
     }
   }
@@ -108,27 +112,24 @@ export default function PageLogin() {
   }
 
   // ======= 寫入 DB =======
-  const fetchUserLogin = (data) => {
-    console.log(data);
-    console.log(JSON.stringify(data));
-
+  const fetchUserLogin = (data, callback) => {
     if(data.name) {
-      const url = 'https://store.cc94178.com/index.php/FrontEndApi/set_line_info';
-      fetch(url, {
-        crossDomain: true,
-        method: 'POST',
-        headers: {
-          'Accept': '*/*',
-          'Connection': 'keep-alive',
-          'Content-Type':'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': 'true'
-        },
-        body: JSON.stringify(data)
-      })
+      const url = 'http://127.0.0.1:8888/index.php/FrontEndApi/set_line_info'; //'https://store.cc94178.com/index.php/FrontEndApi/set_line_info';
+      fetch(
+        url, 
+        {
+          crossDomain: true,
+          method: 'POST',
+          headers: {
+            'Accept': '*/*',
+            'Content-Type':'application/x-www-form-urlencoded'
+          },
+          body: JSON.stringify(data)
+        }
+      )
       .then((response) => response.json())
       .then((res) => {
-        return res;
+        if(callback) callback(res);
       });
     }
   }
@@ -145,12 +146,6 @@ export default function PageLogin() {
     console.log('submit');
   }
 
-<<<<<<< HEAD
-=======
-const PageLogin = () => {
->>>>>>> f628f38c49f0d1491af999b92fe5588ed3deca4e
-=======
->>>>>>> 6cfa978e50292d42b30f5df88ef8c17163992e57
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
