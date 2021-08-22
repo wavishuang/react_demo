@@ -5,6 +5,7 @@ export const setUser = user => ({
   payload: { user }
 });
 
+// 非同步
 export const fetchUser = () => async (dispatch) => {
   const response = await fetch('http://httpbin.org/get');
   const user = await response.json();

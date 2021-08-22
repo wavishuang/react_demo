@@ -1,22 +1,20 @@
-.news {
-  .newsList {
+.newsList {
+  display: flex;
+  flex-direction: column;
+  margin: .5rem 0 0;
+  padding: 0 15px;
+  li {
     display: flex;
-    flex-direction: column;
-    margin: .5rem 0 0;
-    padding: 0 15px;
-    li {
-      display: flex;
-      justify-content: space-between;
-      //padding: 0 20px 0 0;
-      align-items: center;
+    justify-content: space-between;
+    //padding: 0 20px 0 0;
+    align-items: center;
 
-      .linkText {
-        cursor: pointer;
-        color: #3f51b5;
+    .linkText {
+      cursor: pointer;
+      color: #3f51b5;
 
-        &:hover {
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

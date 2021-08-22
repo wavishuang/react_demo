@@ -10,6 +10,8 @@ const initialState = {
 
 const news = (state = initialState, action) => {
   switch(action.type) {
+    case TYPES.SET_NEWS:
+      return action.payload.news;
     case TYPES.ADD_NEWS: // 新增最新消息
       return {
         ...state,

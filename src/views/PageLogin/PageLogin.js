@@ -122,7 +122,7 @@ export default function PageLogin() {
           method: 'POST',
           headers: {
             'Accept': '*/*',
-            'Content-Type':'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
           },
           body: JSON.stringify(data)
         }

@@ -10,8 +10,8 @@ import styles from "./PageNews.scss";
 const News = () => {
   return (
     <Auth clazzName={styles.home}>
+      <CssBaseLine />  
       <h2 className={publicStyles.title}>最新消息</h2>
-      <CssBaseLine />
       <PageNews />
       <Menu page={1} />
     </Auth>

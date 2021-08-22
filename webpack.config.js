@@ -5,6 +5,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
+  mode: 'development',
   entry: './src/index.jsx',  // 進入點
   output: { // 打包設定
     filename: 'bundle.js',

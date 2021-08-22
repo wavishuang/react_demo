@@ -1,8 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const NewsReader = (props) => {
+
+const NewsReader = () => {
+  const history = useHistory();
   const news = useSelector((state) => state.news.news);
   const {id: targetNewsId} = useParams();
   const targetNews = news.find(theNews => String(theNews.id) === String(targetNewsId));
@@ -11,6 +13,7 @@ const NewsReader = (props) => {
     <div>
       <h3>{targetNews.title}</h3>
       <div>{targetNews.describe}</div>
+      <button type="button" onClick={() => history.go(-1)}>返回</button>
     </div>
   );
 };

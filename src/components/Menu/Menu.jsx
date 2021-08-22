@@ -26,15 +26,9 @@ import ListIcon from '@material-ui/icons/List'; // 訂單資訊
 import InfoIcon from '@material-ui/icons/Info'; // 商品資訊
 //import RestoreIcon from '@material-ui/icons/Restore';
 //import LocationOnIcon from '@material-ui/icons/LocationOn';
-
 import LogoutIcon from "../../images/logout.png";
 
-import {
-  getLineCode,
-  getApiToken,
-  getLineUserInfo 
-} from "../../utils/helperLine.js";
-
+// components
 import { clearLineUser } from "../../actions/actionAuth";
 
 // SCSS
@@ -79,18 +73,9 @@ const Menu = (props) => {
   }, [auth]);
 
   const [isLogined, setIsLogined] = useState(false);
-  const [value] = useState(() => {
+  const [page] = useState(() => {
     return (props.page !== null) ? props.page : null;
   });
-
-
-
-  //const [favoriteClass, setFavoriteClass] = useState('inherit');
-  //useEffect(() => {
-  //  if(props.page === 1) {
-  //    setFavoriteClass('secondary');
-  //  }
-  //}, []);
 
   const history = useHistory();
   const handleLink = (path) => {
@@ -106,7 +91,7 @@ const Menu = (props) => {
 
   return (
     <BottomNavigation
-      value={value}
+      value={page}
       showLabels
       className={styles.bottomNav}
     >
