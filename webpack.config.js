@@ -4,7 +4,7 @@ const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// console.log("NODE_ENV:", NODE_ENV);
+console.log("NODE_ENV:", NODE_ENV);
 
 const config = {
   // mode: 'development',
